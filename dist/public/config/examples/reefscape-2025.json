@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "gameId": "reefscape-2025-template",
+  "name": "REEFSCAPE example",
+  "season": 2025,
+  "version": "example-1",
+  "description": "Illustrative scouting template, not a certified scoring implementation.",
+  "sections": [
+    {"id": "auto", "label": "Auto", "fields": [
+      {"id": "leftStart", "label": "Left starting line", "type": "toggle", "default": false},
+      {"id": "autoCoral", "label": "Coral placed", "type": "counter", "min": 0, "max": 20, "step": 1, "default": 0}
+    ]},
+    {"id": "teleop", "label": "Teleop", "fields": [
+      {"id": "coralL1", "label": "Coral level 1", "type": "counter", "min": 0, "max": 99, "step": 1, "default": 0},
+      {"id": "coralL2", "label": "Coral level 2", "type": "counter", "min": 0, "max": 99, "step": 1, "default": 0},
+      {"id": "coralL3", "label": "Coral level 3", "type": "counter", "min": 0, "max": 99, "step": 1, "default": 0},
+      {"id": "coralL4", "label": "Coral level 4", "type": "counter", "min": 0, "max": 99, "step": 1, "default": 0},
+      {"id": "processor", "label": "Algae in processor", "type": "counter", "min": 0, "max": 99, "step": 1, "default": 0},
+      {"id": "net", "label": "Algae in net", "type": "counter", "min": 0, "max": 99, "step": 1, "default": 0}
+    ]},
+    {"id": "endgame", "label": "Endgame", "fields": [
+      {"id": "cage", "label": "Barge outcome", "type": "choice", "default": "none", "options": [{"value": "none", "label": "None"}, {"value": "park", "label": "Park"}, {"value": "shallow", "label": "Shallow"}, {"value": "deep", "label": "Deep"}]},
+      {"id": "climbSeconds", "label": "Climb time (seconds)", "type": "number", "min": 0, "max": 150, "step": 0.5, "default": 0},
+      {"id": "notes", "label": "Notes", "type": "text", "multiline": true, "maxLength": 400, "default": ""}
+    ]}
+  ],
+  "metrics": [
+    {"id": "coral", "label": "Coral per match", "operation": "sum", "fields": ["autoCoral", "coralL1", "coralL2", "coralL3", "coralL4"], "description": "Total observed coral placements across auto and teleop, not point-weighted."},
+    {"id": "cageRate", "label": "Cage success", "operation": "rate", "field": "cage", "values": ["shallow", "deep"], "description": "Percentage of matches ending with shallow or deep cage success."}
+  ],
+  "sources": ["https://firstfrc.blob.core.windows.net/frc2025/Manual/2025GameManual.pdf"]
+}

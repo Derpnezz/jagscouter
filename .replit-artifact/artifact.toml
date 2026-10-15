@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "JagScouter — JagBots4638"
+version = "1.0.0"
+id = "artifacts/frc-scouting"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19660
+
+[services.development]
+run = "pnpm --filter @workspace/frc-scouting run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/frc-scouting", "run", "build" ]
+publicDir = "artifacts/frc-scouting/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19660"
+BASE_PATH = "/"

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "gameId": "charged-up-2023-template",
+  "name": "CHARGED UP example",
+  "season": 2023,
+  "version": "example-1",
+  "description": "Illustrative robot piece-by-row counts, not alliance grid reconstruction or official points.",
+  "sections": [
+    {"id": "auto", "label": "Auto", "fields": [
+      {"id": "start", "type": "choice", "label": "Starting position", "layout": "grid", "columns": 3, "allowEmpty": true, "default": "", "options": [
+        {"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}
+      ]},
+      {"id": "leftCommunity", "type": "toggle", "label": "Left community", "default": false}
+    ]},
+    {"id": "teleop", "label": "Teleop", "fields": [
+      {
+        "id": "pieces", "type": "counterGrid", "label": "Pieces placed by this robot",
+        "rows": [{"id": "high", "label": "High"}, {"id": "mid", "label": "Mid"}, {"id": "hybrid", "label": "Hybrid"}],
+        "columns": [{"id": "cone", "label": "Cone"}, {"id": "cube", "label": "Cube"}],
+        "cells": [
+          {"id": "highCone", "row": "high", "column": "cone", "min": 0, "max": 99, "step": 1},
+          {"id": "highCube", "row": "high", "column": "cube", "min": 0, "max": 99, "step": 1},
+          {"id": "midCone", "row": "mid", "column": "cone", "min": 0, "max": 99, "step": 1},
+          {"id": "midCube", "row": "mid", "column": "cube", "min": 0, "max": 99, "step": 1},
+          {"id": "hybridCone", "row": "hybrid", "column": "cone", "min": 0, "max": 99, "step": 1},
+          {"id": "hybridCube", "row": "hybrid", "column": "cube", "min": 0, "max": 99, "step": 1}
+        ],
+        "default": {"highCone": 0, "highCube": 0, "midCone": 0, "midCube": 0, "hybridCone": 0, "hybridCube": 0}
+      },
+      {"id": "pickup", "type": "multiSelect", "label": "Pickup locations used", "minSelections": 0, "maxSelections": 2, "default": [], "options": [
+        {"value": "floor", "label": "Floor"}, {"value": "substation", "label": "Substation"}
+      ]}
+    ]},
+    {"id": "endgame", "label": "Endgame", "fields": [
+      {"id": "balanceSeconds", "type": "duration", "label": "Observed balancing attempt", "min": 0, "max": 150, "precision": 1, "default": 0},
+      {"id": "balanced", "type": "toggle", "label": "Observed balanced finish", "default": false},
+      {"id": "notes", "type": "text", "label": "Notes", "maxLength": 400, "multiline": true, "default": ""}
+    ]}
+  ],
+  "metrics": [
+    {"id": "balanceTime", "label": "Observed balance seconds", "operation": "sum", "fields": ["balanceSeconds"], "description": "Average optional measured attempt seconds, including untimed zeros."},
+    {"id": "balanced", "label": "Balanced finish rate", "operation": "rate", "field": "balanced", "values": [true], "description": "Percentage of matches observed ending balanced, not official points."}
+  ],
+  "sources": ["https://firstfrc.blob.core.windows.net/frc2023/Manual/Sections/2023FRCGameManual-05.pdf"]
+}

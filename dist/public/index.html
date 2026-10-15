@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#090909">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="JagScouter by JagBots4638. Scout FRC matches offline, transfer observations by QR or CSV, and review team data.">
+  <meta property="og:title" content="JagScouter | JagBots4638">
+  <meta property="og:description" content="JagBots4638’s offline FRC scouting website. Capture matches and review team observations.">
+  <meta property="og:site_name" content="JagScouter">
+  <meta property="og:type" content="website">
+  <title>JagScouter | JagBots4638</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="root"></div>
+  <div id="toast-container"></div>
+
+  <!-- Bundled libraries; the service worker prepares offline reopening. -->
+  <script src="js/lib/lz-string.min.js"></script>
+  <script src="js/lib/qrcode.min.js"></script>
+  <script src="js/lib/html5-qrcode.min.js"></script>
+  <script src="js/lib/chart.min.js"></script>
+
+  <!-- App modules (load order matters) -->
+  <script src="js/ui.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/records.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/csv.js"></script>
+  <script src="js/blocks.js"></script>
+  <script src="js/offline.js"></script>
+  <script src="js/pages/home.js"></script>
+  <script src="js/pages/scouter.js"></script>
+  <script src="js/pages/manager.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

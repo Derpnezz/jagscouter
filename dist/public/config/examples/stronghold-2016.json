@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "gameId": "stronghold-2016-template",
+  "name": "STRONGHOLD example",
+  "season": 2016,
+  "version": "example-1",
+  "description": "Optional robot observations illustrating multi-select and duration blocks, not official scoring.",
+  "sections": [
+    {"id": "auto", "label": "Auto", "fields": [
+      {"id": "start", "type": "choice", "label": "Observed starting lane", "layout": "grid", "columns": 3, "allowEmpty": true, "emptyLabel": "Not observed", "default": "", "options": [
+        {"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}
+      ]},
+      {"id": "autoBoulders", "type": "counter", "label": "Boulders scored", "min": 0, "max": 20, "step": 1, "default": 0}
+    ]},
+    {"id": "teleop", "label": "Teleop", "fields": [
+      {"id": "defenses", "type": "multiSelect", "label": "Defenses this robot crossed", "minSelections": 0, "maxSelections": 9, "default": [], "options": [
+        {"value": "lowBar", "label": "Low bar"}, {"value": "portcullis", "label": "Portcullis"},
+        {"value": "cheval", "label": "Cheval de frise"}, {"value": "moat", "label": "Moat"},
+        {"value": "ramparts", "label": "Ramparts"}, {"value": "drawbridge", "label": "Drawbridge"},
+        {"value": "sallyPort", "label": "Sally port"}, {"value": "rockWall", "label": "Rock wall"},
+        {"value": "roughTerrain", "label": "Rough terrain"}
+      ]},
+      {"id": "cycleSeconds", "type": "duration", "label": "One observed cycle", "help": "Optional timing of one agreed collection-to-score cycle. Correct seconds manually if needed.", "min": 0, "max": 150, "precision": 1, "default": 0},
+      {"id": "defenseRating", "type": "rating", "label": "Defense effectiveness", "min": 0, "max": 5, "step": 1, "default": 0}
+    ]},
+    {"id": "endgame", "label": "Endgame", "fields": [
+      {"id": "scaled", "type": "toggle", "label": "Observed successful scale", "default": false},
+      {"id": "notes", "type": "text", "label": "Notes", "maxLength": 400, "multiline": true, "default": ""}
+    ]}
+  ],
+  "metrics": [
+    {"id": "cycle", "label": "Observed cycle seconds", "operation": "sum", "fields": ["cycleSeconds"], "description": "Average optional measured cycle seconds; untimed zero observations are included. Not official score."}
+  ],
+  "sources": ["https://firstfrc.blob.core.windows.net/frc2016manuals/GameManual/FRC-2016-game-manual-03.pdf"]
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "gameId": "rebuilt-2026",
+  "name": "REBUILT",
+  "season": 2026,
+  "version": "1.0",
+  "description": "Record observed robot actions, not official alliance scores.",
+  "sections": [
+    {
+      "id": "auto",
+      "label": "Auto",
+      "description": "Watch this robot during the autonomous period.",
+      "fields": [
+        {"id": "autoFuel", "type": "counter", "label": "Fuel scored", "help": "Count fuel scored in the active hub.", "min": 0, "max": 999, "step": 1, "default": 0},
+        {"id": "autoTower", "type": "toggle", "label": "Level 1 tower achieved", "default": false}
+      ]
+    },
+    {
+      "id": "teleop",
+      "label": "Teleop",
+      "description": "Only count fuel scored while the hub is active.",
+      "fields": [
+        {"id": "teleopFuel", "type": "counter", "label": "Fuel scored", "help": "Includes transition, alliance shifts, and the endgame while active.", "min": 0, "max": 999, "step": 1, "default": 0},
+        {"id": "defenseRating", "type": "rating", "label": "Defense effectiveness", "min": 0, "max": 5, "step": 1, "default": 0, "help": "0 = no defense; 5 = highly effective defense."}
+      ]
+    },
+    {
+      "id": "endgame",
+      "label": "Endgame",
+      "fields": [
+        {"id": "climbLevel", "type": "choice", "label": "Final tower level", "default": "none", "options": [{"value": "none", "label": "None"}, {"value": "level1", "label": "Level 1"}, {"value": "level2", "label": "Level 2"}, {"value": "level3", "label": "Level 3"}]},
+        {"id": "disabled", "type": "toggle", "label": "Robot disabled during match", "default": false}
+      ]
+    },
+    {
+      "id": "notes",
+      "label": "Notes",
+      "fields": [
+        {"id": "minorFouls", "type": "counter", "label": "Minor fouls observed", "min": 0, "max": 99, "step": 1, "default": 0},
+        {"id": "majorFouls", "type": "counter", "label": "Major fouls observed", "min": 0, "max": 99, "step": 1, "default": 0},
+        {"id": "notes", "type": "text", "label": "Match notes", "multiline": true, "maxLength": 400, "default": "", "placeholder": "Reliability, driver habits, or anything worth sharing…"}
+      ]
+    }
+  ],
+  "metrics": [
+    {"id": "fuel", "label": "Fuel per match", "operation": "sum", "fields": ["autoFuel", "teleopFuel"], "description": "Auto fuel + active-hub teleop fuel. Observed count, not official score."},
+    {"id": "auto", "label": "Auto fuel", "operation": "sum", "fields": ["autoFuel"], "description": "Observed autonomous fuel count."},
+    {"id": "climb", "label": "Climb success", "operation": "rate", "field": "climbLevel", "values": ["level1", "level2", "level3"], "description": "Percentage of matches with any final tower level achieved."},
+    {"id": "defense", "label": "Defense rating", "operation": "sum", "fields": ["defenseRating"], "description": "Average scout rating on a 0–5 scale."}
+  ],
+  "sources": ["https://firstfrc.blob.core.windows.net/frc2026/Manual/2026GameManual.pdf"]
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "gameId": "crescendo-2024-template",
+  "name": "CRESCENDO example",
+  "season": 2024,
+  "version": "example-1",
+  "description": "Illustrative scouting template, not a certified scoring implementation.",
+  "sections": [
+    {"id": "auto", "label": "Auto", "fields": [
+      {"id": "leave", "label": "Left starting zone", "type": "toggle", "default": false},
+      {"id": "autoSpeaker", "label": "Speaker notes", "type": "counter", "min": 0, "max": 20, "step": 1, "default": 0},
+      {"id": "autoAmp", "label": "Amp notes", "type": "counter", "min": 0, "max": 20, "step": 1, "default": 0}
+    ]},
+    {"id": "teleop", "label": "Teleop", "fields": [
+      {"id": "speaker", "label": "Speaker notes (unamplified)", "type": "counter", "min": 0, "max": 99, "step": 1, "default": 0},
+      {"id": "amplified", "label": "Speaker notes (amplified)", "type": "counter", "min": 0, "max": 99, "step": 1, "default": 0},
+      {"id": "amp", "label": "Amp notes", "type": "counter", "min": 0, "max": 99, "step": 1, "default": 0},
+      {"id": "defense", "label": "Defense rating", "type": "rating", "min": 0, "max": 5, "step": 1, "default": 0}
+    ]},
+    {"id": "endgame", "label": "Endgame", "fields": [
+      {"id": "stage", "label": "Stage outcome", "type": "choice", "default": "none", "options": [{"value": "none", "label": "None"}, {"value": "park", "label": "Park"}, {"value": "onstage", "label": "Onstage"}]},
+      {"id": "trap", "label": "Trap notes", "type": "counter", "min": 0, "max": 3, "step": 1, "default": 0},
+      {"id": "notes", "label": "Notes", "type": "text", "multiline": true, "maxLength": 400, "default": ""}
+    ]}
+  ],
+  "metrics": [
+    {"id": "notes", "label": "Notes per match", "operation": "sum", "fields": ["autoSpeaker", "autoAmp", "speaker", "amplified", "amp", "trap"], "description": "Total observed notes scored at all targets, not official score."},
+    {"id": "stageRate", "label": "Onstage success", "operation": "rate", "field": "stage", "values": ["onstage"], "description": "Percentage of matches with an observed onstage finish."}
+  ],
+  "sources": ["https://firstfrc.blob.core.windows.net/frc2024/Manual/2024GameManual.pdf"]
+}
